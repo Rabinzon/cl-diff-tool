@@ -1,9 +1,9 @@
 {
   "name": "cl-diff-tool",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "command line diff tool",
   "bin": {
-    "brain-prime": "dist/bin/gendiff"
+    "gendiff": "dist/bin/gendiff.js"
   },
   "scripts": {
     "babel-node": "babel-node",
