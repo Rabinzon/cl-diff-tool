@@ -1,5 +1,5 @@
 {
-  "name": "gendiff",
+  "name": "cl-diff-tool",
   "version": "0.0.1",
   "description": "command line diff tool",
   "bin": {
@@ -12,6 +12,7 @@
     "lint": "eslint src/",
     "lint-fix": "eslint --fix src/",
     "lint-staged": "lint-staged",
+    "release": "standard-version",
     "prepare": "npm run build"
   },
   "repository": {
