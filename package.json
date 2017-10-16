@@ -9,10 +9,10 @@
     "babel-node": "babel-node",
     "start": "babel-node -- src/bin/gendiff",
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
-    "prepublish": "npm run lint && npm run build",
     "lint": "eslint src/",
     "lint-fix": "eslint --fix src/",
-    "lint-staged": "lint-staged"
+    "lint-staged": "lint-staged",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -42,7 +42,8 @@
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
     "lint-staged": "^4.2.3",
-    "pre-commit": "^1.2.2"
+    "pre-commit": "^1.2.2",
+    "standard-version": "^4.2.0"
   },
   "precommit.silent": true,
   "pre-commit": "lint-staged",
