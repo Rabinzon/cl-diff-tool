@@ -1,6 +1,6 @@
 {
   "name": "cl-diff-tool",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "command line diff tool",
   "bin": {
     "brain-prime": "dist/bin/gendiff"
