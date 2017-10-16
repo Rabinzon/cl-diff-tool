@@ -13,7 +13,7 @@
     "lint-fix": "eslint --fix src/",
     "lint-staged": "lint-staged",
     "release": "standard-version",
-    "prepare": "npm run build"
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
