@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.0"></a>
+# [0.1.0](https://github.com/Rabinzon/project-lvl2-s129/compare/v0.0.5...v0.1.0) (2017-10-17)
+
+
+### Features
+
+* add json format diffs ([d0557eb](https://github.com/Rabinzon/project-lvl2-s129/commit/d0557eb))
+
+
+
 <a name="0.0.5"></a>
 ## [0.0.5](https://github.com/Rabinzon/project-lvl2-s129/compare/v0.0.4...v0.0.5) (2017-10-16)
 
