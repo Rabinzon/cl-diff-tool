@@ -1,21 +1,29 @@
-import program from 'commander';
-import process from 'process';
-import { json } from './diff';
-import configReader from './configReader';
+import fs from 'fs';
+import path from 'path';
+import { map, compose, head } from 'lodash/fp';
 
-program
-  .version('0.0.1')
-  .arguments('<firstConfig> <secondConfig>')
-  .description('Compares two configuration files and shows a difference.')
-  .option('-f, --format [type]', 'Output format')
-  .action((firstPath, secondPath) => {
-    const firstConfig = configReader(firstPath);
-    const secondConfig = configReader(secondPath);
+import diff from './diff';
 
-    if (!firstConfig || !secondConfig) {
-      program.help();
-    }
-    console.log(json(firstConfig, secondConfig));
-  })
-  .parse(process.argv);
+const parsers = {
+  json: JSON.parse,
+};
 
+const isFilesExtEqual = (firstPath, secondPath) =>
+  path.extname(firstPath) === path.extname(secondPath);
+
+const getConfigs = (...paths) => {
+  const configType = path.extname(head(paths)).split('.').join('');
+  return compose(
+    map(parsers[configType]),
+    map(fs.readFileSync))(paths);
+};
+
+const genDiff = (firstPath, secondPath) => {
+  if (!isFilesExtEqual(firstPath, secondPath)) {
+    throw new Error('File types should be equal');
+  }
+
+  return diff(...getConfigs(firstPath, secondPath));
+};
+
+export default genDiff;
