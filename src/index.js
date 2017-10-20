@@ -1,11 +1,13 @@
 import fs from 'fs';
 import path from 'path';
+import yamlParser from 'js-yaml';
 import { map, compose, head } from 'lodash/fp';
 
 import diff from './diff';
 
 const parsers = {
   json: JSON.parse,
+  yaml: yamlParser.safeLoad,
 };
 
 const isFilesExtEqual = (firstPath, secondPath) =>
