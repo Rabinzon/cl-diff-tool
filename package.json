@@ -1,7 +1,8 @@
 {
   "name": "cl-diff-tool",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "command line diff tool",
+  "main": "dist/index.js",
   "bin": {
     "gendiff": "dist/bin/gendiff.js"
   },
@@ -56,6 +57,7 @@
   "precommit.silent": true,
   "pre-commit": "lint-staged",
   "dependencies": {
+    "lodash": "^4.17.4",
     "commander": "^2.11.0"
   }
 }
