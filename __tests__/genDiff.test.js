@@ -16,3 +16,8 @@ test('yaml diff', () => {
   expect(genDiff(firstConfigPath, secondConfigPath)).toEqual(result);
 });
 
+test('ini diff', () => {
+  const firstConfigPath = '__fixtures__/before.ini';
+  const secondConfigPath = '__fixtures__/after.ini';
+  expect(genDiff(firstConfigPath, secondConfigPath)).toEqual(result);
+});
