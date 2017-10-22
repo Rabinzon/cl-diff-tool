@@ -26,7 +26,4 @@ const toPlainView = (ast, path) =>
     return `Property '${currentPath}' was ${state}. ${getChanges(value, oldValue, state)}`.trim();
   }).filter(t => t).join('\n');
 
-export default (ast) => {
-  const result = toPlainView(ast);
-  return `${result}\n`;
-};
+export default ast => toPlainView(ast);

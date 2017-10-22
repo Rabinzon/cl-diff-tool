@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import yamlParser from 'js-yaml';
 import iniParser from 'ini';
-import { standart, plain } from './formats';
+import { standart, plain, json } from './formats';
 import buildAst from './buildAst';
 
 const parsers = {
@@ -15,6 +15,7 @@ const parsers = {
 const formatters = {
   standart,
   plain,
+  json,
 };
 const isFilesExtEqual = (firstPath, secondPath) =>
   path.extname(firstPath) === path.extname(secondPath);

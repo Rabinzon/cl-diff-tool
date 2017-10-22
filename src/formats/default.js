@@ -30,4 +30,5 @@ const astToString = (ast, level = 0) =>
   }).join('');
 
 export default ast =>
-  `{${astToString(ast)}\n}\n`;
+  `{${astToString(ast)}\n}`;
+
