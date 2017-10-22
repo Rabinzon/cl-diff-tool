@@ -5,6 +5,15 @@ import genDiff from '../src/';
 
 const result1 = fs.readFileSync('__fixtures__/output.txt', 'utf-8');
 const result2 = fs.readFileSync('__fixtures__/nestedOutput.txt', 'utf-8');
+const plainOutput = fs.readFileSync('__fixtures__/plainOutput.txt', 'utf-8');
+
+['json', 'yaml', 'ini'].forEach((type) => {
+  test(`#genDiff ${type} diff with plain output`, () => {
+    const firstConfigPath = `__fixtures__/nested1.${type}`;
+    const secondConfigPath = `__fixtures__/nested2.${type}`;
+    expect(genDiff(firstConfigPath, secondConfigPath, 'plain')).toEqual(plainOutput);
+  });
+});
 
 ['json', 'yaml', 'ini'].forEach((type) => {
   test(`#genDiff nested ${type} diff`, () => {
