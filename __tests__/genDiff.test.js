@@ -1,8 +1,16 @@
 /* eslint-disable no-undef */
 
+import fs from 'fs';
 import genDiff from '../src/';
 
-const result = '{\n\t  host: hexlet.io\n\t+ timeout: 20\n\t- timeout: 50\n\t- proxy: 123.234.53.22\n\t+ verbose: true\n}';
+const result = fs.readFileSync('__fixtures__/output.txt', 'utf-8');
+
+test('#genDiff json diff', () => {
+  const firstConfigPath = '__fixtures__/nested1.json';
+  const secondConfigPath = '__fixtures__/nested2.json';
+  const output = fs.readFileSync('__fixtures__/nestedOutput.txt', 'utf-8');
+  expect(genDiff(firstConfigPath, secondConfigPath)).toEqual(output);
+});
 
 test('#genDiff json diff', () => {
   const firstConfigPath = '__fixtures__/before.json';

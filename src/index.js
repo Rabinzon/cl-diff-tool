@@ -3,7 +3,7 @@ import path from 'path';
 import yamlParser from 'js-yaml';
 import iniParser from 'ini';
 
-import diff from './diff';
+import genDiff from './genDiff';
 
 const parsers = {
   json: JSON.parse,
@@ -15,7 +15,7 @@ const parsers = {
 const isFilesExtEqual = (firstPath, secondPath) =>
   path.extname(firstPath) === path.extname(secondPath);
 
-const genDiff = (firstPath, secondPath) => {
+export default (firstPath, secondPath) => {
   if (!isFilesExtEqual(firstPath, secondPath)) {
     throw new Error('File types should be equal');
   }
@@ -28,7 +28,6 @@ const genDiff = (firstPath, secondPath) => {
   const beforeObject = parseConfig(beforeConfig);
   const afterObject = parseConfig(afterConfig);
 
-  return diff(beforeObject, afterObject);
+  return genDiff(beforeObject, afterObject);
 };
 
-export default genDiff;
