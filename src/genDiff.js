@@ -1,3 +1,5 @@
+/* eslint-disable no-use-before-define */
+
 import { isObject, union } from 'lodash/fp';
 
 const states = {
@@ -67,19 +69,14 @@ const createRow = (key, value, sign, level) => {
   return (`\n${getIndent(level)}${sign || ' '} ${key}: ${val}`);
 };
 
-const astToString = (ast, level = 0) => {
-  const result = ast
-    .reduce((acc, { key, value, state, oldValue }) => {
-      if (state === 'changed') {
-        return acc +
-          createRow(key, value, states.added, level) +
-          createRow(key, oldValue, states.removed, level);
-      }
+const astToString = (ast, level = 0) => ast.map(({ key, value, state, oldValue }) => {
+  if (state === 'changed') {
+    return createRow(key, value, states.added, level) +
+      createRow(key, oldValue, states.removed, level);
+  }
 
-      return acc + createRow(key, value, states[state], level);
-    }, '');
-  return result;
-};
+  return createRow(key, value, states[state], level);
+}).join('');
 
 
 export default (firstConfig, secondConfig) => {

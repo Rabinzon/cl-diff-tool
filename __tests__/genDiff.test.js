@@ -3,31 +3,23 @@
 import fs from 'fs';
 import genDiff from '../src/';
 
-const result = fs.readFileSync('__fixtures__/output.txt', 'utf-8');
+const result1 = fs.readFileSync('__fixtures__/output.txt', 'utf-8');
+const result2 = fs.readFileSync('__fixtures__/nestedOutput.txt', 'utf-8');
 
-test('#genDiff json diff', () => {
-  const firstConfigPath = '__fixtures__/nested1.json';
-  const secondConfigPath = '__fixtures__/nested2.json';
-  const output = fs.readFileSync('__fixtures__/nestedOutput.txt', 'utf-8');
-  expect(genDiff(firstConfigPath, secondConfigPath)).toEqual(output);
+['json', 'yaml', 'ini'].forEach((type) => {
+  test(`#genDiff nested ${type} diff`, () => {
+    const firstConfigPath = `__fixtures__/nested1.${type}`;
+    const secondConfigPath = `__fixtures__/nested2.${type}`;
+    expect(genDiff(firstConfigPath, secondConfigPath)).toEqual(result2);
+  });
 });
 
-test('#genDiff json diff', () => {
-  const firstConfigPath = '__fixtures__/before.json';
-  const secondConfigPath = '__fixtures__/after.json';
-  expect(genDiff(firstConfigPath, secondConfigPath)).toEqual(result);
-});
-
-test('#genDiff yaml diff', () => {
-  const firstConfigPath = '__fixtures__/before.yaml';
-  const secondConfigPath = '__fixtures__/after.yaml';
-  expect(genDiff(firstConfigPath, secondConfigPath)).toEqual(result);
-});
-
-test('#genDiff ini diff', () => {
-  const firstConfigPath = '__fixtures__/before.ini';
-  const secondConfigPath = '__fixtures__/after.ini';
-  expect(genDiff(firstConfigPath, secondConfigPath)).toEqual(result);
+['json', 'yaml', 'ini'].forEach((type) => {
+  test(`#genDiff ${type} diff`, () => {
+    const firstConfigPath = `__fixtures__/before.${type}`;
+    const secondConfigPath = `__fixtures__/after.${type}`;
+    expect(genDiff(firstConfigPath, secondConfigPath)).toEqual(result1);
+  });
 });
 
 test('#genDiff with different file type should throw error', () => {
