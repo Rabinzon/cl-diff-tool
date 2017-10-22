@@ -2,8 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import yamlParser from 'js-yaml';
 import iniParser from 'ini';
-
-import genDiff from './genDiff';
+import { standart, plain } from './formats';
+import buildAst from './buildAst';
 
 const parsers = {
   json: JSON.parse,
@@ -12,10 +12,14 @@ const parsers = {
   ini: iniParser.parse,
 };
 
+const formatters = {
+  standart,
+  plain,
+};
 const isFilesExtEqual = (firstPath, secondPath) =>
   path.extname(firstPath) === path.extname(secondPath);
 
-export default (firstPath, secondPath) => {
+export default (firstPath, secondPath, format = 'standart') => {
   if (!isFilesExtEqual(firstPath, secondPath)) {
     throw new Error('File types should be equal');
   }
@@ -27,7 +31,7 @@ export default (firstPath, secondPath) => {
   const parseConfig = parsers[configType];
   const beforeObject = parseConfig(beforeConfig);
   const afterObject = parseConfig(afterConfig);
-
-  return genDiff(beforeObject, afterObject);
+  const ast = buildAst(beforeObject, afterObject, format);
+  return formatters[format](ast);
 };
 
