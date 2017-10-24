@@ -1,34 +1,38 @@
 /* eslint-disable no-use-before-define */
 
-import { isObject } from 'lodash/fp';
+import { flatten } from 'lodash/fp';
 
 const states = {
   added: '+',
-  notChanged: ' ',
+  unchanged: ' ',
   removed: '-',
+  updated: ' ',
 };
 
-const getIndent = (level) => {
-  if (level === 0) {
-    return '  ';
+const getSpaces = space =>
+  (`${' '.repeat((space + 1) * 2)}`);
+
+const toString = (key, value, sign, space, children) => {
+  const indent = getSpaces(space);
+  let currentValue;
+  if (children.length) {
+    currentValue = `{${astToString(children, space + 2)}\n${indent}  }`;
   }
-  return `  ${getIndent(level - 1)}`;
+  return `\n${indent}${sign} ${key}: ${currentValue || value}`;
 };
 
-const createRow = (key, value, sign, level) => {
-  const val = isObject(value) ? `{${astToString(value, level + 2)}\n${getIndent(level)}  }` : value;
-  return (`\n${getIndent(level)}${sign || ' '} ${key}: ${val}`);
+const iterate = level => ({ key, newValue, type, oldValue, children }) => (
+  type === 'updated' ? [
+    toString(key, newValue, states.added, level, children),
+    toString(key, oldValue, states.removed, level, children),
+  ] : toString(key, newValue, states[type], level, children)
+);
+
+const astToString = (diffAst, level = 0) => {
+  const result = diffAst.map(iterate(level));
+  return flatten(result).join('');
 };
 
-const astToString = (ast, level = 0) =>
-  ast.map(({ key, value, state, oldValue }) => {
-    if (state === 'updated') {
-      return createRow(key, value, states.added, level) +
-        createRow(key, oldValue, states.removed, level);
-    }
-    return createRow(key, value, states[state], level);
-  }).join('');
-
-export default ast =>
-  `{${astToString(ast)}\n}`;
+export default diffAst =>
+  `{${astToString(diffAst)}\n}`;
 

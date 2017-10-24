@@ -6,7 +6,7 @@ import genDiff from '../src/';
 const result1 = fs.readFileSync('__fixtures__/output.txt', 'utf-8').trim();
 const result2 = fs.readFileSync('__fixtures__/nestedOutput.txt', 'utf-8').trim();
 const plainOutput = fs.readFileSync('__fixtures__/plainOutput.txt', 'utf-8').trim();
-const jsonOutput = fs.readFileSync('__fixtures__/jsonOutput.txt', 'utf-8').trim();
+const jsonOutput = fs.readFileSync('__fixtures__/jsonOutput.json', 'utf-8').trim();
 
 const outputs = {
   plainOutput,

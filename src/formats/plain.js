@@ -1,29 +1,31 @@
-/* eslint-disable array-callback-return, consistent-return */
+/* eslint-disable array-callback-return, consistent-return, no-use-before-define */
 
-import { isObject } from 'lodash/fp';
+const toString = (path, type, newValue, oldValue) => {
+  const text = {
+    updated: ` From ${oldValue} to ${newValue}`,
+    added: ` with value: ${newValue}`,
+  }[type];
 
-const getChanges = (value, oldValue, state) => {
-  const currentValue = isObject(value) ? 'complex value' : value;
-  const prevValue = isObject(oldValue) ? 'complex value' : oldValue;
-  if (state === 'updated') {
-    return `From ${prevValue} to ${currentValue}`;
-  }
-  if (state === 'added') {
-    return `with value: ${currentValue}`;
-  }
-  return '';
+  return `Property '${path}' was ${type}.${text || ''}`;
 };
 
-const toPlainView = (ast, path) =>
-  ast.map(({ key, value, state, oldValue }) => {
-    if (state === 'notChanged') return;
-    const currentPath = path ? `${path}.${key}` : key;
+const iterate = path => ({ key, newValue, type, oldValue, children }) => {
+  const isUnchanged = type === 'unchanged';
 
-    if (!state) {
-      return toPlainView(value, currentPath);
-    }
+  if (!children.length && isUnchanged) {
+    return;
+  }
 
-    return `Property '${currentPath}' was ${state}. ${getChanges(value, oldValue, state)}`.trim();
-  }).filter(t => t).join('\n');
+  const currentPath = path ? `${path}.${key}` : key;
 
-export default ast => toPlainView(ast);
+  if (children.length && isUnchanged) {
+    return toPlainView(children, currentPath);
+  }
+
+  return toString(currentPath, type, newValue, oldValue);
+};
+
+const toPlainView = (diffAst, path) =>
+  diffAst.map(iterate(path)).filter(t => t).join('\n');
+
+export default diffAst => toPlainView(diffAst);

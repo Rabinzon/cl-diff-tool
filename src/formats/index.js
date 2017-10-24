@@ -1,3 +1,9 @@
-export standart from './default';
-export plain from './plain';
-export json from './json';
+import standard from './default';
+import plain from './plain';
+import json from './json';
+
+export default {
+  standard,
+  plain,
+  json,
+};

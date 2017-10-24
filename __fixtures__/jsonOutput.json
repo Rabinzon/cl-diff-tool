@@ -1,0 +1,120 @@
+[
+  {
+    "key": "common",
+    "type": "unchanged",
+    "newValue": "complex value",
+    "oldValue": "complex value",
+    "children": [
+      {
+        "key": "setting1",
+        "type": "unchanged",
+        "newValue": "Value 1",
+        "oldValue": "Value 1",
+        "children": []
+      },
+      {
+        "key": "setting3",
+        "type": "unchanged",
+        "newValue": true,
+        "oldValue": true,
+        "children": []
+      },
+      {
+        "key": "setting4",
+        "type": "added",
+        "newValue": "blah blah",
+        "oldValue": null,
+        "children": []
+      },
+      {
+        "key": "setting5",
+        "type": "added",
+        "newValue": "complex value",
+        "oldValue": null,
+        "children": [
+          {
+            "key": "key5",
+            "type": "unchanged",
+            "newValue": "value5",
+            "oldValue": null,
+            "children": []
+          }
+        ]
+      },
+      {
+        "key": "setting2",
+        "type": "removed",
+        "newValue": "200",
+        "oldValue": "200",
+        "children": []
+      },
+      {
+        "key": "setting6",
+        "type": "removed",
+        "newValue": "complex value",
+        "oldValue": "complex value",
+        "children": [
+          {
+            "key": "key",
+            "type": "unchanged",
+            "newValue": "value",
+            "oldValue": "value",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "group1",
+    "type": "unchanged",
+    "newValue": "complex value",
+    "oldValue": "complex value",
+    "children": [
+      {
+        "key": "foo",
+        "type": "unchanged",
+        "newValue": "bar",
+        "oldValue": "bar",
+        "children": []
+      },
+      {
+        "key": "baz",
+        "type": "updated",
+        "newValue": "bars",
+        "oldValue": "bas",
+        "children": []
+      }
+    ]
+  },
+  {
+    "key": "group3",
+    "type": "added",
+    "newValue": "complex value",
+    "oldValue": null,
+    "children": [
+      {
+        "key": "fee",
+        "type": "unchanged",
+        "newValue": "100500",
+        "oldValue": null,
+        "children": []
+      }
+    ]
+  },
+  {
+    "key": "group2",
+    "type": "removed",
+    "newValue": "complex value",
+    "oldValue": "complex value",
+    "children": [
+      {
+        "key": "abc",
+        "type": "unchanged",
+        "newValue": "12345",
+        "oldValue": "12345",
+        "children": []
+      }
+    ]
+  }
+]
