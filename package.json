@@ -1,6 +1,6 @@
 {
   "name": "cl-diff-tool",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "command line diff tool",
   "main": "dist/index.js",
   "bin": {

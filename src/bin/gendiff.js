@@ -7,7 +7,7 @@ program
   .version('0.0.1')
   .arguments('<firstConfig> <secondConfig>')
   .description('Compares two configuration files and shows a difference.')
-  .option('-f, --format [type]', 'Output format')
+  .option('-f, --format [json|plain]', 'Output format')
   .action((firstConfig, secondConfig, options) => {
     if (!firstConfig || !secondConfig) {
       program.help();

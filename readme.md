@@ -12,5 +12,51 @@ $ gendiff [options] <firstConfig> <secondConfig>
 ```
 -h, --help           output usage information
 -V, --version        output the version number
--f, --format [type]  output format
+-f, --format [json|plain]  output format
+```
+
+### Example
+```sh
+$ cat data1.json
+
+{
+	"name":"John",
+	"age":30,
+	"cars":[ "Ford", "BMW", "Fiat" ]
+}
+```
+
+```sh
+$ cat data2.json
+
+{
+	"name":"John",
+	"age":50,
+	"cars": ["Tesla"],
+	"children": {
+		"name": "Den",
+		"age": 20,
+		"cars": "BMW"
+	}
+}
+```
+
+```sh
+$ gendiff data1.json data2.json
+{
+    name: John
+  + age: 50
+  - age: 30
+    cars: {
+      + 0: Tesla
+      - 0: Ford
+      - 1: BMW
+      - 2: Fiat
+    }
+  + children: {
+        name: Den
+        age: 20
+        cars: BMW
+    }
+}
 ```
